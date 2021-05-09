@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.EmployeeMapper">
+<mapper namespace="com.qinh.dao.EmployeeMapper">
     <!--
         namespace:名称空间;指定为接口的全类名
         id：唯一标识
@@ -19,6 +19,6 @@
     </select>
 
     <select id="getEmpById" resultType="emp" databaseId="oracle">
-        select employee_id id,last_name lastName,email email from employees where employee_id = #{id}
+        select id id,last_name lastName,email email ,gender gender from employee where id = #{id}
     </select>
 </mapper>

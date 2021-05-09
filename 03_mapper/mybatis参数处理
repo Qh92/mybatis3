@@ -1,5 +1,15 @@
-单个参数：mybatis不会做特殊处理
+单个参数(除集合和数组)：mybatis不会做特殊处理
     #{参数名}：参数名可以任意写，取出参数值
+单个参数(集合或数组):
+    Employee getEmpById2(List<Integer> ids);
+    <select id="getEmpById2" resultType="emp" databaseId="mysql">
+        select * from employee where id = #{list[0]}
+    </select>
+
+    Employee getEmpById3(Integer[] ids);
+    <select id="getEmpById3" resultType="emp" databaseId="mysql">
+        select * from employee where id = #{array[0]}
+    </select>
 
 多个参数：mybatis会做特殊处理。
         多个参数会被封装成一个map

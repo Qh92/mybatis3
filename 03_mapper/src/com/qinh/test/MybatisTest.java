@@ -1,8 +1,10 @@
 package com.qinh.test;
 
+import com.qinh.dao.DepartmentMapper;
 import com.qinh.dao.EmployeeMapper;
 import com.qinh.dao.EmployeeMapperAnnotation;
 import com.qinh.dao.EmployeeMapperPlus;
+import com.qinh.entity.Department;
 import com.qinh.entity.Employee;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -36,18 +38,18 @@ import java.util.*;
 public class MybatisTest {
 
     private void initLog() {
-        FileInputStream fileInputStream = null;
+        InputStream inputStream = null;
         try {
             Properties properties = new Properties();
-            fileInputStream = new FileInputStream("conf/log4j.xml");
-            properties.load(fileInputStream);
+            inputStream = Resources.getResourceAsStream("conf/log4j.xml");
+            properties.load(inputStream);
             PropertyConfigurator.configure(properties);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (fileInputStream != null) {
+            if (inputStream != null) {
                 try {
-                    fileInputStream.close();
+                    inputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -56,7 +58,7 @@ public class MybatisTest {
     }
 
     private SqlSessionFactory getSqlSessionFactory() throws IOException {
-        initLog();
+        //initLog();
         String resource = "conf/mybatis-config.xml";
         InputStream inputStream  = Resources.getResourceAsStream(resource);
         return new SqlSessionFactoryBuilder().build(inputStream);
@@ -171,6 +173,13 @@ public class MybatisTest {
             ids.add(1);
             Employee employee = mapper.getEmpById2(ids);
             System.out.println(employee);
+
+            System.out.println();
+
+            Integer[] ids2 = new Integer[]{5,2};
+            Employee employee1 = mapper.getEmpById3(ids2);
+            System.out.println(employee1);
+
         }finally {
             sqlSession.close();
         }
@@ -235,11 +244,51 @@ public class MybatisTest {
 
             Employee employee2 = mapper.getEmpByIdStep(1);
             System.out.println(employee2.getLastName());
+            System.out.println(employee2);
+        }finally {
+            sqlSession.close();
+        }
+    }
 
+    /**
+     * 连表查询中返回值中有集合属性
+     *
+     * @throws IOException
+     */
+    @Test
+    public void t7() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
+
+            Department department = mapper.getDeptByIdPlus(1);
+            System.out.println(department);
+            System.out.println(department.getEmps());
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+    /**
+     * 分步查询
+     *
+     * @throws IOException
+     */
+    @Test
+    public void t8() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
+            Department dept = mapper.getDeptByIdStep(1);
+            System.out.println(dept.getDepartmentName());
+            System.out.println(dept.getEmps());
 
         }finally {
             sqlSession.close();
         }
-
     }
+
+
 }

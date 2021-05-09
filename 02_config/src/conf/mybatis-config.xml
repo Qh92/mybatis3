@@ -50,7 +50,7 @@
                     type:数据源类型;UNPOOLED(UnpooledDataSourceFactory)|POOLED(PooledDataSourceFactory)|JNDI(JndiDataSourceFactory)
                         自定义数据源:实现DataSourceFactory接口，type是全类名
     -->
-    <environments default="dev_mysql">
+    <environments default="dev_oracle">
         <environment id="dev_mysql">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">

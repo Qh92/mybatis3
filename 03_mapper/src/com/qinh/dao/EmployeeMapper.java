@@ -50,6 +50,8 @@ public interface EmployeeMapper {
      */
     Employee getEmpById2(List<Integer> ids);
 
+    Employee getEmpById3(Integer[] ids);
+
     Employee getEmpByMap(Map<String ,Object> map);
 
     /**

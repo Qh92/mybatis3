@@ -1,6 +1,9 @@
 package com.qinh.dao;
 
 import com.qinh.entity.Department;
+import com.qinh.entity.Employee;
+
+import java.util.List;
 
 /**
  * @author Qh
@@ -10,4 +13,10 @@ import com.qinh.entity.Department;
 public interface DepartmentMapper {
 
     Department getDeptById(Integer id);
+
+    Department getDeptByIdPlus(Integer id);
+
+    Department getDeptByIdStep(Integer id);
+
+    List<Employee> getEmpsByDeptId(Integer deptId);
 }

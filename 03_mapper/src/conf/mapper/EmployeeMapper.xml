@@ -28,6 +28,10 @@
         select * from employee where id = #{list[0]}
     </select>
 
+    <select id="getEmpById3" resultType="emp" databaseId="mysql">
+        select * from employee where id = #{array[0]}
+    </select>
+
     <select id="getEmpByMap" resultType="emp">
         select * from employee where id = #{id} and last_name = #{lastName}
     </select>
