@@ -2,13 +2,17 @@ package com.qinh.entity;
 
 import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
+
 /**
  * @author Qh
  * @version 1.0
  * @date 2021-05-05-21:53
  */
 @Alias("emp")
-public class Employee {
+public class Employee implements Serializable {
+
+    private static final long serialVersionUID = 3073270180333988047L;
 
     private Integer id;
     private String lastName;

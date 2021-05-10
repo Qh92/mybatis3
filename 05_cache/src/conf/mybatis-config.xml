@@ -22,7 +22,8 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!-- 将值为Null的字段的类型设置为NULL,默认为OTHER -->
         <setting name="jdbcTypeForNull" value="NULL"/>
-        <!-- 显示的指定每个我们需要更改的配置的值，即使是默认的。防止版本更新带来的问题 -->
+        <!-- 显式的指定每个我们需要更改的配置的值，即使是默认的。防止版本更新带来的问题 -->
+        <setting name="cacheEnabled" value="true"/>
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
@@ -109,6 +110,7 @@
         -->
         <mapper resource="conf/mapper/EmployeeMapperDynamicSQL.xml"/>
         <mapper resource="conf/mapper/EmployeeMapper.xml"/>
+        <mapper resource="conf/mapper/DepartmentMapper.xml"/>
         <!--<mapper class="com.qinh.dao.EmployeeMapperAnnotation"/>-->
         <!-- 批量注册 -->
         <!--<package name="com.qinh.dao"/>-->

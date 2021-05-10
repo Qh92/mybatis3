@@ -1,5 +1,6 @@
 package com.qinh.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,9 @@ import java.util.List;
  * @version 1.0
  * @date 2021-05-07-17:38
  */
-public class Department {
+public class Department implements Serializable {
+
+    private static final long serialVersionUID = 8446578846203599208L;
 
     private Integer id;
     private String departmentName;
