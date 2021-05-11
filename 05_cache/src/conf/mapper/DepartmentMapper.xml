@@ -3,7 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qinh.dao.DepartmentMapper">
-    <cache/>
+    <!-- 引用缓存：namespace,指定和哪个名称命名空间下的缓存一样 -->
+    <cache-ref namespace="com.qinh.dao.EmployeeMapper"/>
+    <!--<cache/>-->
 
     <select id="getDeptById" resultType="com.qinh.entity.Department">
         select id,dept_name departmentName from dept where id = #{id}

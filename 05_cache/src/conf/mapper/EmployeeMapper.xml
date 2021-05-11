@@ -23,7 +23,8 @@
          type="":指定自定义缓存的全类名
                 实现Cache接口即可
     -->
-    <cache eviction="FIFO" flushInterval="60000" readOnly="false" size="1024"/>
+    <!--<cache eviction="FIFO" flushInterval="60000" readOnly="false" size="1024"/>-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
 
     <!--
