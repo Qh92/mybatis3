@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qinh.dao.EmployeeMapper">
+    <!--
+        namespace:名称空间;指定为接口的全类名
+        id：唯一标识
+        resultType：返回值类型
+        #{id}：从传递过来的参数中取出id值
+        public Employee getEmpById(Integer id);
+     -->
+    <resultMap id="myEmp" type="com.qinh.entity.Employee">
+        <id column="id" property="id"/>
+        <result column="emp_status" property="empStatus" typeHandler="xxx"/>
+    </resultMap>
+    <select id="getEmpById" resultType="com.qinh.entity.Employee">
+        select id,last_name lastName,gender,email ,emp_status as empStatus from employee where id = #{id}
+    </select>
+
+    <select id="getEmps" resultType="com.qinh.entity.Employee">
+        select id,last_name lastName,gender,email from employee
+    </select>
+
+    <insert id="addEmp" parameterType="com.qinh.entity.Employee" useGeneratedKeys="true" keyProperty="id" >
+        insert into employee(last_name,email,gender,emp_status) values(#{lastName},#{email},#{gender},#{empStatus})
+    </insert>
+
+    <!--
+        1.使用select标签定义调用存储过程
+        2.statementType="CALLABLE":表示要调用存储过程
+        3.{call procedure_name(params)}
+    -->
+    <select id="getPageByProcedure" statementType="CALLABLE" databaseId="oracle">
+        {call hello_test(
+                #{start,mode=IN,jdbcType=INTEGER}
+                ,#{end,mode=IN,jdbcType=INTEGER}
+                ,#{count,mode=OUT,jdbcType=INTEGER}
+                ,#{employees,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=pageEmp}
+        )}
+    </select>
+
+    <resultMap id="pageEmp" type="com.qinh.entity.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+    </resultMap>
+</mapper>
