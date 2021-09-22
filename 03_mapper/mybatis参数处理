@@ -47,7 +47,7 @@ Page{
 }
 
 =================================思考===============================
-public Employee getEmp(@Parma("id") Integer id,String lastName);
+public Employee getEmp(@Param("id") Integer id,String lastName);
     取值：id ===> #{id}          lastName ===> #{param2}
 
 public Employee getEmp(Integer id , @Param("e") Employee emp);
