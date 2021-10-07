@@ -12,7 +12,7 @@
      -->
     <resultMap id="myEmp" type="com.qinh.entity.Employee">
         <id column="id" property="id"/>
-        <result column="emp_status" property="empStatus" typeHandler="xxx"/>
+        <result column="emp_status" property="empStatus" typeHandler="com.qinh.typehandler.MyEnumEmpStatusTypeHandler"/>
     </resultMap>
     <select id="getEmpById" resultType="com.qinh.entity.Employee">
         select id,last_name lastName,gender,email ,emp_status as empStatus from employee where id = #{id}
